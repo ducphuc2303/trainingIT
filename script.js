@@ -1,16 +1,28 @@
 function appendToDisplay(value) {
-    document.getElementById('display').value += value;
+    const display = document.getElementById('display');
+    display.value += value;
 }
 
 function clearDisplay() {
-    document.getElementById('display').value = '';
+    const display = document.getElementById('display');
+    display.value = '';
 }
 
 function calculateResult() {
+    const display = document.getElementById('display');
+    const historyList = document.getElementById('history-list');
     try {
-        let result = eval(document.getElementById('display').value);
-        document.getElementById('display').value = result;
-    } catch (error) {
-        document.getElementById('display').value = 'Error';
+        const result = eval(display.value);
+        const historyItem = document.createElement('li');
+        historyItem.textContent = `${display.value} = ${result}`;
+        historyList.appendChild(historyItem);
+        display.value = result;
+    } catch {
+        display.value = 'Error';
     }
+}
+
+function clearHistory() {
+    const historyList = document.getElementById('history-list');
+    historyList.innerHTML = '';
 }
